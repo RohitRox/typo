@@ -16,4 +16,4 @@ Feature: Create Categories
     Then I should be on the categories new page
     And I should see "category1"
     When I follow "category1"
-    Then I should be on category1 edit page
+    Then I should be on the categories edit page for category1

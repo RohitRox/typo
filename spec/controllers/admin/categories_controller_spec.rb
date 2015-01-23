@@ -4,7 +4,6 @@ describe Admin::CategoriesController do
   render_views
 
   before(:each) do
-    Factory(:blog)
     #TODO Delete after removing fixtures
     Profile.delete_all
     henri = Factory(:user, :login => 'henri', :profile => Factory(:profile_admin, :label => Profile::ADMIN))
@@ -14,6 +13,11 @@ describe Admin::CategoriesController do
   it "test_index" do
     get :index
     assert_response :redirect, :action => 'index'
+  end
+
+  it "test_new" do
+    get :new
+    assert_template 'new'
   end
 
   describe "test_edit" do
