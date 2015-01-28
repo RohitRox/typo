@@ -17,6 +17,8 @@ module NavigationHelpers
       '/'
     when /^the new article page$/
       '/admin/content/new'
+    when /^the articles edit page for (.*)$/
+      "/admin/content/edit/#{Article.find_by_title($1).id}"
     when /^the categories new page/
       '/admin/categories/new'
     when /^the categories edit page for (.*)$/

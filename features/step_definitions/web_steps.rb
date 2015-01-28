@@ -144,6 +144,14 @@ Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
   end
 end
 
+Then /^I should not see field "(.*?)"$/ do |field|
+  page.should_not have_field(field)
+end
+
+Then /^I should not see button "(.*?)"$/ do |button|
+  page.should_not have_button(button)
+end
+
 Then /^(?:|I )should not see "([^"]*)"$/ do |text|
   if page.respond_to? :should
     page.should have_no_content(text)
