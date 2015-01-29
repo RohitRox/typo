@@ -4,7 +4,7 @@ Feature: Merge Articles Authorization
 
   Background:
     Given the blog is set up
-    And I am logged into the admin panel
+    And As an author I am logged into the admin panel
     And the following articles exist:
     | id | title    | body              |
     | 1  | Article1 | Lorem epsum.      |

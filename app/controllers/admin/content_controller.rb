@@ -52,6 +52,16 @@ class Admin::ContentController < Admin::BaseController
     redirect_to :action => 'index'
   end
 
+  def merge
+    article = Article.find params[:id]
+    merge_with = Article.find params[:merge_with]
+    unless article == merge_with
+      article.body = [article.body, merge_with.body].join(" ")
+      article.save
+    end
+    redirect_to article.permalink_url
+  end
+
   def insert_editor
     editor = 'visual'
     editor = 'simple' if params[:editor].to_s == 'simple'

@@ -41,11 +41,29 @@ Given /^the blog is set up$/ do
                 :profile_id => 1,
                 :name => 'admin',
                 :state => 'active'})
+  User.create!({:login => 'author',
+                :password => 'aaaaaaaa',
+                :email => 'author@snow.com',
+                :profile_id => 2,
+                :name => 'author',
+                :state => 'active'})
 end
 
 And /^I am logged into the admin panel$/ do
   visit '/accounts/login'
   fill_in 'user_login', :with => 'admin'
+  fill_in 'user_password', :with => 'aaaaaaaa'
+  click_button 'Login'
+  if page.respond_to? :should
+    page.should have_content('Login successful')
+  else
+    assert page.has_content?('Login successful')
+  end
+end
+
+And /^As an author I am logged into the admin panel$/ do
+  visit '/accounts/login'
+  fill_in 'user_login', :with => 'author'
   fill_in 'user_password', :with => 'aaaaaaaa'
   click_button 'Login'
   if page.respond_to? :should
@@ -145,11 +163,11 @@ Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
 end
 
 Then /^I should not see field "(.*?)"$/ do |field|
-  page.should_not have_field(field)
+  page.should have_no_selector(:xpath, "//input[@name='#{field}']")
 end
 
 Then /^I should not see button "(.*?)"$/ do |button|
-  page.should_not have_button(button)
+  page.should have_no_selector(:xpath, "//input[@type='submit' and @name='#{button}']")
 end
 
 Then /^(?:|I )should not see "([^"]*)"$/ do |text|
