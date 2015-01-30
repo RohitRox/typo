@@ -59,6 +59,7 @@ class Admin::ContentController < Admin::BaseController
       article.body = [article.body, merge_with.body].join(" ")
       article.save
       merge_with.comments.update_all(article_id: article.id)
+      merge_with.delete
     end
     redirect_to article.permalink_url
   end

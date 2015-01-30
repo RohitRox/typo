@@ -20,3 +20,5 @@ Feature: Merge Articles
     And I press "Merge"
     Then the article "Article1" should have "body" having content "Lorem epsum. Duis aute irure."
     And the article "Article1" should have comments count equal to 1
+    When  I am on the articles page
+    Then I should not see "Article2"
