@@ -58,6 +58,7 @@ class Admin::ContentController < Admin::BaseController
     unless article == merge_with
       article.body = [article.body, merge_with.body].join(" ")
       article.save
+      merge_with.comments.update_all(article_id: article.id)
     end
     redirect_to article.permalink_url
   end
